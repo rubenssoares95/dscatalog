@@ -28,4 +28,12 @@ public class CategoryService {
     var entity = obj.orElseThrow(() -> new EntityNotFoundException("Entity not found"));
     return new CategoryDTO(entity);
   }
+
+  @Transactional
+  public CategoryDTO create(CategoryDTO categoryDTO) {
+    var entity = new Category();
+    entity.setName(categoryDTO.getName());
+    entity = repository.save(entity);
+    return new CategoryDTO(entity);
+  }
 }
